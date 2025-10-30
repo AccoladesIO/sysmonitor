@@ -53,7 +53,7 @@ brew install cmake
 ### Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/sysmonitor.git
+git clone https://github.com/accoladesio/sysmonitor.git
 cd sysmonitor
 ```
 
@@ -409,7 +409,7 @@ Contributions are welcome! Please see [CONTRIBUTING.md](docs/CONTRIBUTING.md) fo
 
 ```bash
 # Fork and clone
-git clone https://github.com/yourusername/sysmonitor.git
+git clone https://github.com/AccoladesIO/sysmonitor
 cd sysmonitor
 
 # Create feature branch
@@ -444,8 +444,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/yourusername/sysmonitor/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/yourusername/sysmonitor/discussions)
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/AccoladesIO/sysmonitor/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/AccoladesIO/sysmonitor/discussions)
 - 📧 **Email**: your.email@example.com
 
 ---
@@ -454,7 +454,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you find this project useful, please consider giving it a star!
 
-[![Star History](https://api.star-history.com/svg?repos=yourusername/sysmonitor&type=Date)](https://star-history.com/#yourusername/sysmonitor&Date)
+[![Star History](https://api.star-history.com/svg?repos=accoladesio/sysmonitor&type=Date)](https://star-history.com/#accoladesio/sysmonitor&Date)
 
 ---
 
