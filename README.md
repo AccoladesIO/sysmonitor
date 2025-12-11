@@ -458,4 +458,4 @@ If you find this project useful, please consider giving it a star!
 
 ---
 
-**Made with ❤️ by [Your Name]**# sysmonitor
+**Made with ❤️ by Accolades **# sysmonitor
