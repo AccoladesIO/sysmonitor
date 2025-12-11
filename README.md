@@ -446,7 +446,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - 🐛 **Bug Reports**: [GitHub Issues](https://github.com/AccoladesIO/sysmonitor/issues)
 - 💬 **Discussions**: [GitHub Discussions](https://github.com/AccoladesIO/sysmonitor/discussions)
-- 📧 **Email**: your.email@example.com
+- 📧 **Email**: ononobip@gmail.com
 
 ---
 
