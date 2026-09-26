@@ -17,10 +17,12 @@ std::vector<ProcessInfo> Optimizer::optimizeProcesses(const std::vector<ProcessI
     return optimized;
 }
 
-bool Optimizer::optimizeProcess(int pid, int nice_increment) {
-    return Platform::setProcessPriority(pid, nice_increment);
+bool Optimizer::optimizeProcess(int pid, int nice_value) {
+    return Platform::setProcessPriority(pid, nice_value);
 }
 
 void Optimizer::setCPUThreshold(int threshold) {
     cpu_threshold = threshold;
 }
+
+int Optimizer::getCPUThreshold() const { return cpu_threshold; }

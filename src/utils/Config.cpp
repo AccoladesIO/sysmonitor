@@ -2,6 +2,7 @@
 #include "../platform/Platform.h"
 #include <iostream>
 #include <fstream>
+#include <limits>
 
 Config::Config() 
     : interval(2), optimize(false), threshold(80), history_length(120),
@@ -13,11 +14,38 @@ std::string Config::getConfigPath() {
 }
 
 bool Config::load(const std::string& filename) {
-    // Simple JSON parsing - you could use a library like nlohmann/json for production
+    std::string path = filename.empty() ? getConfigPath() : filename;
+    std::ifstream in(path);
+    if (!in.is_open()) return false;
+
+    std::string key;
+    while (in >> key) {
+        if (key == "interval") in >> interval;
+        else if (key == "optimize") in >> optimize;
+        else if (key == "threshold") in >> threshold;
+        else if (key == "history_length") in >> history_length;
+        else if (key == "color_scheme") in >> color_scheme;
+        else if (key == "graph_type") in >> graph_type;
+        else if (key == "auto_save") in >> auto_save;
+        else if (key == "log_level") in >> log_level;
+        else in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
     return true;
 }
 
 bool Config::save(const std::string& filename) {
+    std::string path = filename.empty() ? getConfigPath() : filename;
+    std::ofstream out(path);
+    if (!out.is_open()) return false;
+
+    out << "interval " << interval << "\n"
+        << "optimize " << optimize << "\n"
+        << "threshold " << threshold << "\n"
+        << "history_length " << history_length << "\n"
+        << "color_scheme " << color_scheme << "\n"
+        << "graph_type " << graph_type << "\n"
+        << "auto_save " << auto_save << "\n"
+        << "log_level " << log_level << "\n";
     return true;
 }
 

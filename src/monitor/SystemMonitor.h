@@ -17,20 +17,19 @@ private:
     std::deque<double> cpu_history;
     std::deque<double> mem_history;
     static const int MAX_HISTORY = 120;
-    
+
     void getCPUStats(long& total, long& idle);
     double calculateCPUUsage();
     void getMemoryInfo(long& total, long& available, long& used);
-    std::vector<ProcessInfo> getTopProcesses(int count = 10);
-    
+
 public:
     SystemMonitor();
     SystemMetrics collectMetrics();
     void establishBaseline(int samples = 5);
-    double getBaselineCPU() const { return baseline_cpu; }
-    double getBaselineMem() const { return baseline_mem; }
-    const std::deque<double>& getCPUHistory() const { return cpu_history; }
-    const std::deque<double>& getMemHistory() const { return mem_history; }
+    double getBaselineCPU() const;
+    double getBaselineMem() const;
+    const std::deque<double>& getCPUHistory() const;
+    const std::deque<double>& getMemHistory() const;
 };
 
 #endif // SYSTEMMONITOR_H

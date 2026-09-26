@@ -1,6 +1,4 @@
-// ============================================================================
-// FILE: src/visualizer/Visualizer.h
-// ============================================================================
+
 #ifndef VISUALIZER_H
 #define VISUALIZER_H
 
@@ -25,4 +23,4 @@ public:
     void showHelpOverlay();
 };
 
-#endif // VISUALIZER_H
+#endif 

@@ -19,7 +19,9 @@ SystemMetrics SystemMonitor::collectMetrics() {
     prev_idle = idle;
     
     Platform::getMemoryInfo(metrics.total_mem_kb, metrics.available_mem_kb, metrics.used_mem_kb);
-    metrics.mem_usage_percent = 100.0 * metrics.used_mem_kb / metrics.total_mem_kb;
+    metrics.mem_usage_percent = (metrics.total_mem_kb > 0)
+        ? 100.0 * metrics.used_mem_kb / metrics.total_mem_kb
+        : 0.0;
     
     auto proc_list = Platform::getProcessList();
     for (const auto& p : proc_list) {
@@ -72,3 +74,8 @@ void SystemMonitor::establishBaseline(int samples) {
     std::cout << "Baseline CPU: " << baseline_cpu << "%\n";
     std::cout << "Baseline Memory: " << baseline_mem << "%\n\n";
 }
+
+double SystemMonitor::getBaselineCPU() const { return baseline_cpu; }
+double SystemMonitor::getBaselineMem() const { return baseline_mem; }
+const std::deque<double>& SystemMonitor::getCPUHistory() const { return cpu_history; }
+const std::deque<double>& SystemMonitor::getMemHistory() const { return mem_history; }

@@ -24,16 +24,22 @@ std::string Visualizer::getColorCode(double value) {
 
 std::string Visualizer::createBar(double percentage, int width) {
     int filled = static_cast<int>((percentage / 100.0) * width);
+    if (filled > width) filled = width;
+    if (filled < 0) filled = 0;
+
     std::string bar = "[";
-    
-    for (int i = 0; i < width; i++) {
-        if (i < filled) {
-            bar += getColorCode(percentage) + " \033[0m";
-        } else {
-            bar += "\033[47m \033[0m"; // Gray
-        }
+
+    if (filled > 0) {
+        bar += getColorCode(percentage);
+        bar += std::string(filled, ' ');
+        bar += "\033[0m";
     }
-    
+    if (width - filled > 0) {
+        bar += "\033[47m"; // Gray
+        bar += std::string(width - filled, ' ');
+        bar += "\033[0m";
+    }
+
     bar += "]";
     return bar;
 }
@@ -80,7 +86,6 @@ void Visualizer::displayMetrics(const SystemMetrics& metrics, bool show_optimiza
     strftime(time_str, sizeof(time_str), "%Y-%m-%d %H:%M:%S", localtime(&now_c));
     std::cout << "Time: " << time_str << "\n\n";
     
-    // CPU Section
     std::cout << "\033[1;33m┌─ CPU USAGE ────────────────────────────────────────────────────────────┐\033[0m\n";
     std::cout << "│ Current: " << std::fixed << std::setprecision(2) << metrics.cpu_usage << "%  ";
     
@@ -97,7 +102,6 @@ void Visualizer::displayMetrics(const SystemMetrics& metrics, bool show_optimiza
               << std::fixed << std::setprecision(1) << metrics.cpu_usage << "%\n";
     std::cout << "\033[1;33m└────────────────────────────────────────────────────────────────────────┘\033[0m\n\n";
     
-    // Memory Section
     std::cout << "\033[1;35m┌─ MEMORY USAGE ─────────────────────────────────────────────────────────┐\033[0m\n";
     std::cout << "│ Total: " << metrics.total_mem_kb / 1024 << " MB  |  "
               << "Used: " << metrics.used_mem_kb / 1024 << " MB  |  "
@@ -107,15 +111,13 @@ void Visualizer::displayMetrics(const SystemMetrics& metrics, bool show_optimiza
               << std::fixed << std::setprecision(1) << metrics.mem_usage_percent << "%\n";
     std::cout << "\033[1;35m└────────────────────────────────────────────────────────────────────────┘\033[0m\n\n";
     
-    // Top Processes
     std::cout << "\033[1;32m┌─ TOP PROCESSES (by CPU) ───────────────────────────────────────────────┐\033[0m\n";
     std::cout << "│ " << std::left << std::setw(8) << "PID"
               << std::setw(20) << "Name"
               << std::setw(12) << "CPU %"
               << std::setw(14) << "Memory (MB)"
               << std::setw(10) << "Priority" << "│\n";
-    std::cout << "│ " << std::string(64, '─') << "│\n";
-    
+    std::cout << "│ " << std::string(64, '-') << "│\n";
     for (const auto& proc : metrics.top_processes) {
         std::cout << "│ " << std::left << std::setw(8) << proc.pid
                   << std::setw(20) << proc.name.substr(0, 19)
